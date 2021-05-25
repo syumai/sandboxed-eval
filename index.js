@@ -20,6 +20,9 @@ function sandboxedEval(src) {
   iframe.setAttribute("style", "display: none");
   return new Promise((resolve, reject) => {
     const handleMessage = (event) => {
+      if (event.origin !== "null") {
+        return;
+      }
       const { result, error } = event.data;
       if (error) {
         reject(error);
