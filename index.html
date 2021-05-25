@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>sandboxed eval</title>
+    <style>
+      textarea {
+        width: 300px;
+        height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>iframe sandboxed eval</h1>
+    <h2>Form</h2>
+    <form id="evalForm" action="#">
+      <div>
+        <h3>Code</h3>
+        <textarea name="src">const a = 1;
+const b = 2;
+return a + b;</textarea>
+      </div>
+      <button>Submit</button>
+    </form>
+    <h2>Result</h2>
+    <textarea id="evalResult">
+    </textarea>
+    <script type="module">
+      import { sandboxedEval } from "./index.js";
+      const evalForm = document.getElementById("evalForm");
+      const evalResult = document.getElementById("evalResult");
+      evalForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const src = event.target.src.value;
+        try {
+          const result = await sandboxedEval(src);
+          evalResult.value = JSON.stringify(result);
+        } catch(e) {
+          evalResult.value = e;
+        }
+      })
+    </script>
+    <h2>Repo</h2>
+    <div>
+      <a href="https://github.com/syumai/sandboxed-eval">https://github.com/syumai/sandboxed-eval</a>
+    </div>
+  </body>
+</html>
