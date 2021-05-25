@@ -14,7 +14,7 @@ const iframeSrcDoc = `
 </html>
 `;
 
-function sandboxedEval(src) {
+export function sandboxedEval(src) {
   const iframe = document.createElement("iframe");
   iframe.setAttribute("sandbox", "allow-scripts");
   iframe.setAttribute("style", "display: none");
@@ -40,5 +40,3 @@ function sandboxedEval(src) {
     document.body.appendChild(iframe);
   });
 }
-
-export { sandboxedEval };
