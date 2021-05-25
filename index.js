@@ -1,4 +1,4 @@
-const iframeSrcDoc = `
+const srcdocBase = `
 <!doctype html>
 <html>
 <body>
@@ -24,8 +24,14 @@ function genId() {
 export function sandboxedEval(src) {
   const iframe = document.createElement("iframe");
   iframe.setAttribute("sandbox", "allow-scripts");
-  iframe.setAttribute("style", "display: none");
+  iframe.setAttribute("style", "display: none;");
   const msgId = genId();
+  const escapedSrc = src.replaceAll("\\", "\\\\").replaceAll("`", "\\`");
+  const srcdoc = srcdocBase
+    .replaceAll("{{ id }}", msgId)
+    .replaceAll("{{ src }}", escapedSrc)
+    .replaceAll("{{ origin }}", window.location.origin);
+
   return new Promise((resolve, reject) => {
     const handleMessage = (event) => {
       if (event.origin !== "null") {
@@ -44,11 +50,7 @@ export function sandboxedEval(src) {
       document.body.removeChild(iframe);
     };
     window.addEventListener("message", handleMessage);
-    const escapedSrc = src.replaceAll("\\", "\\\\").replaceAll("`", "\\`");
-    iframe.srcdoc = iframeSrcDoc
-      .replaceAll("{{ id }}", msgId)
-      .replaceAll("{{ src }}", escapedSrc)
-      .replaceAll("{{ origin }}", window.location.origin);
+    iframe.srcdoc = srcdoc;
     document.body.appendChild(iframe);
   });
 }
