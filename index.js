@@ -31,7 +31,7 @@ export function sandboxedEval(src) {
       if (event.origin !== "null") {
         return;
       }
-      const { id, result, error } = event.data;
+      const { id, result, error } = event.data ?? {};
       if (id !== msgId) {
         return;
       }
