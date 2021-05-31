@@ -53,14 +53,7 @@ export function sandboxedEval(src, scope = {}) {
         return;
       }
       if (ready) {
-        iframe.contentWindow.postMessage(
-          {
-            id,
-            src,
-            scope,
-          },
-          "*"
-        );
+        iframe.contentWindow.postMessage({ id, src, scope }, "*");
         return;
       }
       if (error) {
