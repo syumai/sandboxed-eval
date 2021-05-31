@@ -1,10 +1,10 @@
-const srcdoc = `
+const srcdoc = (origin, id) => `
 <!doctype html>
 <html>
 <body>
 <script>
-const origin = "{{ origin }}";
-const id = "{{ id }}"
+const origin = "${origin}";
+const id = "${id}"
 const handleMessage = (event) => {
   if (event.origin !== origin) {
     return;
@@ -70,9 +70,7 @@ export function sandboxedEval(src, scope = {}) {
     };
     window.addEventListener("message", handleMessage);
 
-    iframe.srcdoc = srcdoc
-      .replace("{{ origin }}", window.location.origin)
-      .replace("{{ id }}", msgId);
+    iframe.srcdoc = srcdoc(window.location.origin, msgId);
     document.body.appendChild(iframe);
   });
 }
