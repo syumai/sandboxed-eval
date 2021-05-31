@@ -7,7 +7,6 @@ const origin = "{{ origin }}";
 const id = "{{ id }}"
 window.parent.postMessage({ id, ready: true }, origin);
 window.addEventListener("message", (event) => {
-  console.log(event.origin);
   if (event.origin !== origin) {
     return;
   }
