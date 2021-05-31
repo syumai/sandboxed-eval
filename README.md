@@ -4,7 +4,7 @@ sandboxed eval is *iframe-sandboxed eval* working on the browser.
 
 ## Notice
 
-*This is a experimental project!!*
+*This is an experimental project!!*
 
 ## Demo
 
