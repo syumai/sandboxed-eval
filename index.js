@@ -15,7 +15,7 @@ const handleMessage = (event) => {
   }
   try {
     const result =
-      new Function(...Object.keys(scope), src)(...Object.values(scope));
+      new Function(...Object.keys(scope), '"use strict";' + src)(...Object.values(scope));
     window.parent.postMessage({ id, result }, origin);
   } catch (error) {
     window.parent.postMessage({ id, error }, origin);
