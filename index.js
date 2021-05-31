@@ -5,7 +5,6 @@ const srcdoc = `
 <script>
 const origin = "{{ origin }}";
 const id = "{{ id }}"
-window.parent.postMessage({ id, ready: true }, origin);
 const handleMessage = (event) => {
   if (event.origin !== origin) {
     return;
@@ -23,6 +22,7 @@ const handleMessage = (event) => {
   window.removeEventListener("message", handleMessage);
 };
 window.addEventListener("message", handleMessage);
+window.parent.postMessage({ id, ready: true }, origin);
 </script>
 </body>
 </html>
