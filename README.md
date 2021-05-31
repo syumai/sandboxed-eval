@@ -8,8 +8,7 @@ sandboxed eval is *iframe-sandboxed eval* working on the browser.
 
 ## Demo
 
-* basic: https://syumai.github.io/sandboxed-eval/basic/
-* with allow-same-origin: https://syumai.github.io/sandboxed-eval/sameorigin/
+* https://syumai.github.io/sandboxed-eval/basic/
 
 ## License
 
