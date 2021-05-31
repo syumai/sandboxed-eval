@@ -4,7 +4,7 @@ const srcdoc = (origin, id) => `
 <body>
 <script>
 const origin = "${origin}";
-const id = "${id}"
+const id = "${id}";
 const handleMessage = (event) => {
   if (event.origin !== origin) {
     return;
