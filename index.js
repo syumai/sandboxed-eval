@@ -39,9 +39,6 @@ export function sandboxedEval(src, scope = {}) {
   iframe.setAttribute("sandbox", "allow-scripts");
   iframe.setAttribute("style", "display: none;");
   const msgId = genId();
-  iframe.srcdoc = srcdoc
-    .replace("{{ origin }}", window.location.origin)
-    .replace("{{ id }}", msgId);
 
   return new Promise((resolve, reject) => {
     const handleMessage = (event) => {
@@ -72,6 +69,10 @@ export function sandboxedEval(src, scope = {}) {
       document.body.removeChild(iframe);
     };
     window.addEventListener("message", handleMessage);
+
+    iframe.srcdoc = srcdoc
+      .replace("{{ origin }}", window.location.origin)
+      .replace("{{ id }}", msgId);
     document.body.appendChild(iframe);
   });
 }
