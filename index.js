@@ -6,7 +6,7 @@ const srcdoc = `
 const origin = "{{ origin }}";
 const id = "{{ id }}"
 window.parent.postMessage({ id, ready: true }, origin);
-window.addEventListener("message", (event) => {
+const handleMessage = (event) => {
   if (event.origin !== origin) {
     return;
   }
@@ -20,7 +20,9 @@ window.addEventListener("message", (event) => {
   } catch (error) {
     window.parent.postMessage({ id, error }, origin);
   }
-});
+  window.removeEventListener("message", handleMessage);
+};
+window.addEventListener("message", handleMessage);
 </script>
 </body>
 </html>
