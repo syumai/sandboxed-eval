@@ -1,5 +1,5 @@
-const srcdoc = (origin, id) => `
-<!doctype html>
+const srcdoc = (origin, id) =>
+  `<!doctype html>
 <html>
 <body>
 <script>
@@ -28,8 +28,7 @@ window.addEventListener("message", handleMessage);
 window.parent.postMessage({ id, ready: true }, origin);
 </script>
 </body>
-</html>
-`;
+</html>`;
 
 function genId() {
   return Array.from(crypto.getRandomValues(new Uint32Array(2)))

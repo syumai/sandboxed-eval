@@ -1,14 +1,14 @@
 # sandboxed-eval
 
-sandboxed eval is *iframe-sandboxed eval* working on the browser.
+sandboxed eval is _iframe-sandboxed eval_ working on the browser.
 
 ## Notice
 
-*This is an experimental project!!*
+_This is an experimental project!!_
 
 ## Demo
 
-* https://syumai.github.io/sandboxed-eval/
+- https://syumai.github.io/sandboxed-eval/
 
 ## License
 
