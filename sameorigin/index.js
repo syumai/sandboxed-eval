@@ -1,5 +1,5 @@
 const iframe = (function initSandboxIframe() {
-  const srcdocBase = `
+  const srcdoc = `
 <!doctype html>
 <html>
 <body>
@@ -8,7 +8,7 @@ const iframe = (function initSandboxIframe() {
     if (event.origin !== window.origin) {
       return;
     }
-    const { id, src, scope } = event.data ?? {};
+    const { id, src, scope } = event.data || {};
     const args = Object.keys(scope);
     args.push(src);
     const values = Object.values(scope);
@@ -27,7 +27,6 @@ const iframe = (function initSandboxIframe() {
   const iframe = document.createElement("iframe");
   iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
   iframe.setAttribute("style", "display: none;");
-  const srcdoc = srcdocBase.replaceAll("{{ origin }}", window.location.origin);
   iframe.srcdoc = srcdoc;
   document.body.appendChild(iframe);
   return iframe;
@@ -44,7 +43,10 @@ export function sandboxedEval(src, scope = {}) {
 
   return new Promise((resolve, reject) => {
     const handleMessage = (event) => {
-      if (event.origin !== window.origin) {
+      if (
+        event.origin !== window.origin ||
+        event.source !== iframe.contentWindow
+      ) {
         return;
       }
       const { id, result, error } = event.data ?? {};
