@@ -13,11 +13,9 @@ const handleMessage = (event) => {
   if (id !== senderId) {
     return;
   }
-  const args = Object.keys(scope);
-  args.push(src);
-  const values = Object.values(scope);
   try {
-    const result = new Function(...args)(...values);
+    const result =
+      new Function(...Object.keys(scope), src)(...Object.values(scope));
     window.parent.postMessage({ id, result }, origin);
   } catch (error) {
     window.parent.postMessage({ id, error }, origin);
