@@ -7,6 +7,9 @@ const origin = "${origin}";
 const senderId = "${senderId}";
 const receiverId = "${receiverId}";
 const handleMessage = (event) => {
+  if (event.source !== window.parent) {
+    return;
+  }
   if (event.origin !== origin) {
     return;
   }
