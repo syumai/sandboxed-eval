@@ -3,6 +3,8 @@ const srcdoc = (origin, senderId, receiverId) =>
 <html>
 <body>
 <script>
+delete window.fetch;
+delete window.XMLHttpRequest;
 const origin = "${origin}";
 const senderId = "${senderId}";
 const receiverId = "${receiverId}";
